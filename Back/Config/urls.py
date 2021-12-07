@@ -10,6 +10,5 @@ urlpatterns = [
                   path('admin/', admin.site.urls),
                   # подключение routes приложения api
                   path("api/", include("api.urls")),
-                  path("api/", include("logs.urls")),
                   # route медиа файлов проекта
               ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

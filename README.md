@@ -3,27 +3,20 @@
 ### Project run
 ```
 docker build -t web-image Back
-docker-compose up
+docker-compose up -d
 ```
 ### Project update
 ```
 docker-compose up -d --build
-docker-compose down
+```
+### Collect static
+```
+docker-compose exec web python manage.py collectstatic
 ```
 
-### Run script
+### Create admin
 ```
-docker-compose exec web {script} 
+docker-compose exec web python manage.py createsuperuser
 ```
 
-### Swarm
-```
-docker swarm init --advertise-addr 127.0.0.1:2377
-docker stack deploy -c docker-compose.yml  proj
-```  
-### Remove swarm 
-```
-docker stack rm proj
-docker swarm leave --force
-```
 
