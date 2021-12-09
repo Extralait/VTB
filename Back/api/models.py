@@ -69,12 +69,15 @@ class User(AbstractUser):
 class ProcessingFile(models.Model):
     user = models.ForeignKey(User, verbose_name='User', on_delete=models.CASCADE)
     file_object = models.FileField('Input File Object', upload_to='processed')
-    file_name = models.CharField('File name', max_length=256)
-    file_size = models.PositiveBigIntegerField('File bytes size' )
+    result_file_object = models.TextField('Result File Object, null=True, blank=True')
+    file_name = models.CharField('File name', max_length=256, null=True, blank=True)
+    file_size = models.PositiveBigIntegerField('File bytes size' , null=True, blank=True)
+    result_file_size = models.PositiveBigIntegerField('File bytes size' , null=True, blank=True)
     ready_status = models.BooleanField('Status', default=False)
     result_json = models.JSONField('JSON', null=True, blank=True)
-    # danger = models.IntegerField('Danger', null=True, blank=True)
-    # files = models.IntegerField('Files', null=True, blank=True)
+    total_danger = models.IntegerField('Danger', null=True, blank=True)
+    total_files = models.IntegerField('Files', null=True, blank=True)
+    total_archives = models.IntegerField('Files', null=True, blank=True)
     created_at = models.DateTimeField(auto_now_add=True)
 
     def save(self, *args, **kwargs):
