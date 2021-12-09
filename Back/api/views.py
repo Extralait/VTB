@@ -4,9 +4,20 @@ from rest_framework.parsers import MultiPartParser, FormParser, JSONParser
 from rest_framework.permissions import AllowAny, IsAuthenticated, IsAdminUser
 
 from .serializers import *
+from rest_framework.pagination import PageNumberPagination
+
+
+class StandardResultsSetPagination(PageNumberPagination):
+    """
+    Стандартная пагинация
+    """
+    page_size = 5
+    page_size_query_param = 'page_size'
+    max_page_size = 5
 
 
 class ProcessingFileViewSet(viewsets.ModelViewSet):
+    pagination_class = StandardResultsSetPagination
     parser_classes = (MultiPartParser, FormParser, JSONParser)
     queryset = ProcessingFile.objects.all()
     serializer_class = ProcessingFileCreateSerializer
