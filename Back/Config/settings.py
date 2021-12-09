@@ -210,7 +210,7 @@ STATICFILES_STORAGE = "whitenoise.storage.CompressedManifestStaticFilesStorage"
 
 MEDIA_URL = "/media/"
 
-MEDIA_ROOT = os.path.join(BASE_DIR, "media/")
+MEDIA_ROOT = os.path.join(BASE_DIR, "api/services/vtb_handler/MEDIA_ROOT/")
 
 DOCUMENTATION_URL = "/documentation/"
 
@@ -244,9 +244,6 @@ DJOSER = {
     "SEND_CONFIRMATION_EMAIL": False,
     "TOKEN_MODEL": None,
     "HIDE_USERS": True,
-    "SERIALIZERS": {
-        "current_user": "users.api.serializers.CurrentUserDetailsSerializer",
-    },
     "PERMISSIONS": {
         "activation": ["rest_framework.permissions.AllowAny"],
         "password_reset": ["rest_framework.permissions.AllowAny"],

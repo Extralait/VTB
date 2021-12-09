@@ -79,3 +79,14 @@ wcwidth==0.2.5
 whitenoise==5.3.0
 zope.event==4.5.0
 zope.interface==5.4.0
+filetype
+pyunpack
+lxml
+xmlschema
+yara
+yara-scanner
+yara-python
+networkx
+seedir
+matplotlib
+yattag

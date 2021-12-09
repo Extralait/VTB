@@ -109,3 +109,25 @@ body {
 }
 
 </style>
+
+<style scoped>
+@import '../public/css/lib/bootstrap/bootstrap.min.css';
+@import '../public/css/lib/calendar2/semantic.ui.min.css';
+/*@import '../public/css/lib/calendar2/pignose.calendar.min.css';*/
+@import '../public/css/lib/owl.carousel.min.css';
+@import '../public/css/lib/owl.theme.default.min.css';
+@import '../public/css/helper.css';
+@import '../public/css/style.css';
+@import '../public/css/lib/bootstrap/bootstrap.min.css';
+@import '../public/css/lib/bootstrap/bootstrap.min.css';
+
+    /*<link href="css/lib/calendar2/semantic.ui.min.css" rel="stylesheet">*/
+    /*<link href="" rel="stylesheet">*/
+    /*<link href="" rel="stylesheet" />*/
+    /*<link href="" rel="stylesheet" />*/
+    /*<link href="" rel="stylesheet">*/
+    /*<link href="" rel="stylesheet">*/
+    /*<script src="https:**oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>*/
+    /*<script src="https:**oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>*/
+
+</style>
