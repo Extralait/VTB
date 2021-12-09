@@ -210,7 +210,7 @@ STATICFILES_STORAGE = "whitenoise.storage.CompressedManifestStaticFilesStorage"
 
 MEDIA_URL = "/media/"
 
-MEDIA_ROOT = os.path.join(BASE_DIR, "api/services/vtb_handler/MEDIA_ROOT/")
+MEDIA_ROOT = os.path.join(BASE_DIR, "api/services/vtb_handler/media/")
 
 DOCUMENTATION_URL = "/documentation/"
 
