@@ -22,6 +22,8 @@ class ProcessingFileViewSet(viewsets.ModelViewSet):
     queryset = ProcessingFile.objects.all()
     serializer_class = ProcessingFileCreateSerializer
     permission_classes = (CurrentUserOrAdmin,)
+    filter_fields = [f.name for f in ProcessingFile._meta.fields if not f.__dict__.get('upload_to')]
+    ordering_fields = filter_fields
 
     def get_permissions(self):
         """
