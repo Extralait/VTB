@@ -1,6 +1,6 @@
 from rest_framework import serializers
 
-from api.models import ProcessingFile
+from api.models import ProcessingFile, User
 from api.services.vtb_handler.main import file_checker
 
 
@@ -59,3 +59,27 @@ class ProcessingFileDetailsSerializer(serializers.ModelSerializer):
         model = ProcessingFile
         fields = '__all__'
 
+class UserSerializer(serializers.ModelSerializer):
+    # ProcessingFile
+
+    total_xml = serializers.SerializerMethodField()
+    total_danger = serializers.SerializerMethodField()
+    total_files = serializers.SerializerMethodField()
+    total_archives = serializers.SerializerMethodField()
+
+    def get_total_xml(self, obj):
+        return obj.processingfile_set.count()
+
+    def get_total_danger(self, obj):
+        return sum(map(lambda x: x.total_danger, obj.processingfile_set.all()))
+
+    def get_total_files(self, obj):
+        return sum(map(lambda x: x.total_files, obj.processingfile_set.all()))
+
+    def get_total_archives(self, obj):
+        return sum(map(lambda x: x.total_archives, obj.processingfile_set.all()))
+
+    class Meta:
+        model = User
+        exclude = ['password','is_staff','is_superuser','is_active']
+        read_only = ['email']

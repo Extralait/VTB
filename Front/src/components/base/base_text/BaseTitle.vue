@@ -67,6 +67,14 @@ a:hover{
   border-color: #ffd400 !important;
 }
 
+.black p, .black a{
+  color: black !important;
+  font-size: 15px !important;
+}
+.black{
+  color: black !important;
+  font-size: 15px !important;
+}
 .white-border{
   border:1px solid white;
   border-radius: 5px;

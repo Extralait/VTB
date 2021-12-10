@@ -20,8 +20,8 @@ export default new Router({
     },
     routes: [
         {
-            path: '/home',
-            name:'portfolio',
+            path: '/',
+            name:'admin',
             component: () => import('./views/Home.vue'),
         },
         // {

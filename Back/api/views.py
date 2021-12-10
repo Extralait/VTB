@@ -19,7 +19,6 @@ class StandardResultsSetPagination(PageNumberPagination):
 class ProcessingFileViewSet(viewsets.ModelViewSet):
     pagination_class = StandardResultsSetPagination
     parser_classes = (MultiPartParser, FormParser, JSONParser)
-    queryset = ProcessingFile.objects.all()
     serializer_class = ProcessingFileCreateSerializer
     permission_classes = (CurrentUserOrAdmin,)
     filter_fields = [f.name for f in ProcessingFile._meta.fields if not f.__dict__.get('upload_to')]
@@ -51,12 +50,12 @@ class ProcessingFileViewSet(viewsets.ModelViewSet):
 
         return serializer_class
 
-    def filter_queryset(self, queryset):
+    def get_queryset(self):
         user = self.request.user
         if user.is_staff:
-            pass
+            queryset = ProcessingFile.objects.all()
         else:
-            queryset = queryset.filter(user=user)
+            queryset = ProcessingFile.objects.filter(user=user).all()
         return queryset
 
 

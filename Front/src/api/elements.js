@@ -9,8 +9,8 @@ function createHTTP(url) {
                 return response.data
             })
         },
-        async get(element) {
-            return HTTP.get(`${url}${element.id}/`)
+        async get(id) {
+            return HTTP.get(`${url}${id}/`)
         },
         async patch(element) {
             console.log(element)
@@ -25,12 +25,13 @@ function createHTTP(url) {
         },
         async list(queryParams = '') {
             return HTTP.get(`${url}${queryParams}`).then(response => {
-                return response.data.results
+                return response.data
             })
         }
     }
 }
 
+export const Files = createHTTP('/processed-files/')
 
 export const MyProfile = {
     async get() {

@@ -1,15 +1,12 @@
 <template>
   <div id="app">
-    <Navbar
-        :is_auth="getAuth.is_auth"
-    />
     <RegPopup
         style="z-index: 10005"
         v-if="regPopupHashes.includes($route.hash)"
     />
     <router-view
         v-if="!loading"
-        :user="getAuth.user"
+        :is_auth="getAuth.is_auth"
     />
   </div>
 </template>
@@ -18,20 +15,19 @@
 
 import RegPopup from "@/components/common/RegPopup";
 import {mapActions, mapGetters} from "vuex";
-import Navbar from "@/components/common/Navbar";
 import {HTTP} from "@/api/common";
 
 
 export default {
   name: 'App',
   components: {
-    RegPopup, Navbar
+    RegPopup
   },
   data() {
     return {
       loading: true,
       is_portfolio_emit: false,
-      is_waiting_started:false,
+      is_waiting_started: false,
       regPopupHashes: [
         '#sign_in',
         '#sign_up',
@@ -45,7 +41,7 @@ export default {
     }
   },
   methods: {
-    ...mapActions(['verifyToken', 'activation', 'authorization', 'logout', 'setUser', 'createUser']),
+    ...mapActions(['verifyToken', 'activation', 'authorization', 'logout', 'setUser', 'createUser','setFiles']),
   },
   computed: {
     ...mapGetters(['getAuth']),
@@ -59,7 +55,14 @@ export default {
       await this.verifyToken({"token": localStorageToken})
       if (!this.getAuth.errors.verifyError) {
         HTTP.defaults.headers.common['Authorization'] = 'JWT ' + localStorageToken
-        await this.setUser()
+        try {
+          await this.setUser()
+          await this.setFiles('?ordering=created_at')
+        } catch (e) {
+          // statements to handle any exceptions
+          localStorage.setItem('token', '')
+          console.log(e); // pass exception object to error handler
+        }
       }
     }
     this.loading = false
@@ -110,24 +113,3 @@ body {
 
 </style>
 
-<style scoped>
-@import '../public/css/lib/bootstrap/bootstrap.min.css';
-@import '../public/css/lib/calendar2/semantic.ui.min.css';
-/*@import '../public/css/lib/calendar2/pignose.calendar.min.css';*/
-@import '../public/css/lib/owl.carousel.min.css';
-@import '../public/css/lib/owl.theme.default.min.css';
-@import '../public/css/helper.css';
-@import '../public/css/style.css';
-@import '../public/css/lib/bootstrap/bootstrap.min.css';
-@import '../public/css/lib/bootstrap/bootstrap.min.css';
-
-    /*<link href="css/lib/calendar2/semantic.ui.min.css" rel="stylesheet">*/
-    /*<link href="" rel="stylesheet">*/
-    /*<link href="" rel="stylesheet" />*/
-    /*<link href="" rel="stylesheet" />*/
-    /*<link href="" rel="stylesheet">*/
-    /*<link href="" rel="stylesheet">*/
-    /*<script src="https:**oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>*/
-    /*<script src="https:**oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>*/
-
-</style>

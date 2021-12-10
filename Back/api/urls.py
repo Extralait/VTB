@@ -4,7 +4,7 @@ from rest_framework import routers
 from .views import ProcessingFileViewSet
 
 router = routers.DefaultRouter()
-router.register(r'processed-files', ProcessingFileViewSet)
+router.register(r'processed-files', ProcessingFileViewSet, basename='random')
 
 urlpatterns = [
     # djoser auth urls

@@ -16,4 +16,7 @@ export const PATCH_USER = 'PATCH_USER'
 export const CREATE_USER = 'CREATE_USER'
 export const CREATE_USER_ERROR = 'CREATE_USER_ERROR'
 
+export const SET_FILES = 'SET_FILES'
+export const SET_FILE = 'SET_FILE'
+export const CLEAR_STORE = 'CLEAR_STORE'
 

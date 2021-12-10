@@ -226,7 +226,7 @@ export default {
     }
   },
   methods: {
-    ...mapActions(['createUser','activation', 'authorization', 'setUser', 'logout',
+    ...mapActions(['createUser','clearStore','activation', 'authorization', 'setUser', 'logout',
       'resetPasswordEmail', 'resetPasswordEmailConfirmation', 'resendActivationEmail']),
     clearFormat: function () {
       for (let key of Object.keys(this.errors)) {
@@ -321,18 +321,18 @@ export default {
 
       localStorage.setItem('email', this.form.email)
       localStorage.setItem('password', this.form.password)
-      let path = this.$route.path.split('/')
+      // let path = this.$route.path.split('/')
 
       if (!(['#reset_password','#sign_up'].includes(this.$route.hash))) {
         this.back()
       }
-      if (path[2] === 'reset_password') {
-        await this.$router.push('/portfolio')
-      }
-
-      if (this.$route.hash==='#sign_up') {
-        await this.$router.push('#account_activation')
-      }
+      // if (path[2] === 'reset_password') {
+      //   await this.$router.push('/portfolio')
+      // }
+      //
+      // if (this.$route.hash==='#sign_up') {
+      //   await this.$router.push('#account_activation')
+      // }
 
     },
     timerCheck: function (timeName) {
@@ -354,9 +354,7 @@ export default {
       // eslint-disable-next-line no-unused-vars
       await this.createUser(json).then(resp => {
         if (!this.getAuth.errors.createUserError) {
-          this.resendActivationEmailFunction()
-          // eslint-disable-next-line no-unused-vars
-          let resp1 =resp
+          this.back()
         } else {
           this.errors.email = true
           this.placeholders.email = 'E-mail already exist'
@@ -388,6 +386,7 @@ export default {
         localStorage.setItem('password', '')
       }
       this.logout()
+      this.clearStore()
       this.back()
     },
     resetPasswordEmailConfirmationFunction: async function () {
