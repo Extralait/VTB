@@ -190,10 +190,9 @@ export default {
   width: 100%;
   max-width: 290px;
   /*height: 60px;*/
-  background: #1bbc9b;
+  background-color: #28a745;
   color: #fff;
   /*font-size: 1.125rem;*/
-  font-weight: 700;
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;

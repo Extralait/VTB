@@ -239,7 +239,7 @@
                               'badge-danger':file.status,
                               'badge-success': !file.status
                           }"
-                          class="badge badge-success">{{ file.status ? 'Безопасный>' : 'Вредоносный' }}</span></td>
+                          class="badge badge-success">{{ file.status ? 'Вредоносный' : 'Безопасный' }}</span></td>
                       <td>{{ file.sha1 }}</td>
                       <td>
                         <a
@@ -251,6 +251,7 @@
                     </tbody>
                   </table>
                 </div>
+                <pre id="json" style="text-align: left"></pre>
               </div>
             </div>
           </div>
@@ -304,9 +305,10 @@ export default {
     },
     detailsFile: async function (file){
       await this.setFile(file.id)
-      this.details = this.filesFinder(this.getFile.result_json)
+      this.details = this.maliciousFinder().concat(this.filesFinder(this.getFile.result_json))
       this.current_file=file.file_name
       this.current_file_time=this.dateFormater(Date.parse(file.created_at))
+      document.getElementById("json").innerHTML = JSON.stringify(this.getFile.result_json, undefined, 2);
     },
     downloadFile: function (url,fileName) {
       let xhr = new XMLHttpRequest();
@@ -364,6 +366,13 @@ export default {
         }
       }
       return files
+    },
+    maliciousFinder: function (){
+      let malicious = this.getFile.result_json.xml_data.malicious_paths.children
+      for (let el of malicious){
+        el.status=true
+      }
+      return malicious
     }
   },
   computed: {
@@ -1671,8 +1680,9 @@ a, button {
   transition: all 0.2s ease 0s;
 }
 
-
-
+.btn-success{
+  color: white !important;
+}
 
 
 

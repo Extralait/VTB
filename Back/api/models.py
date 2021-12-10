@@ -74,7 +74,7 @@ class ProcessingFile(models.Model):
     file_size = models.PositiveBigIntegerField('File bytes size' , default=0, null=True, blank=True)
     result_file_size = models.PositiveBigIntegerField('File bytes size' , default=0, null=True, blank=True)
     ready_status = models.BooleanField('Status', default=False)
-    result_json = models.JSONField('JSON',  default={},null=True, blank=True)
+    result_json = models.JSONField('JSON',null=True, blank=True)
     total_danger = models.IntegerField('Danger',  default=0,null=True, blank=True)
     total_files = models.IntegerField('Files',  default=0,null=True, blank=True)
     total_archives = models.IntegerField('Files',  default=0 ,null=True, blank=True)
